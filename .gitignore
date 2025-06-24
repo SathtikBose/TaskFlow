@@ -31,7 +31,3 @@ coverage/
 /test-output/
 
 # Images and screenshots
-*.png
-*.jpg
-*.jpeg
-*.gif
