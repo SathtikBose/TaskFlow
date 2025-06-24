@@ -1,0 +1,94 @@
+TaskFlow API Main Endpoints & Test Data
+=======================================
+
+1. User Registration (No Auth Required)
+---------------------------------------
+Endpoint: POST /api/v1/auth/register
+Role: Public (anyone)
+Body (JSON):
+{
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "password": "TestPass123!",
+  "role": "developer"
+}
+
+1.2. User Registration (No Auth Required)
+---------------------------------------
+Endpoint: POST /api/v1/auth/register
+Role: Public (anyone)
+Body (JSON):
+{
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "password": "TestPass123!",
+  "role": "admin"
+}
+
+2. User Login (No Auth Required)
+-------------------------------
+Endpoint: POST /api/v1/auth/login
+Role: Public (anyone)
+Body (JSON):
+{
+  "email": "testuser@example.com",
+  "password": "TestPass123!"
+}
+
+*Response will set a JWT httpOnly cookie. Use this cookie for all protected endpoints.*
+
+3. Create Project
+-----------------
+Endpoint: POST /api/v1/projects
+Role: admin, manager
+Body (JSON):
+{
+  "name": "Demo Project",
+  "description": "A project for demo purposes",
+  "milestone": "Demo Milestone"
+}
+
+4. Create Task
+--------------
+Endpoint: POST /api/v1/tasks
+Role: manager, developer
+Body (JSON):
+{
+  "title": "Demo Task",
+  "description": "This is a demo task",
+  "status": "todo",
+  "priority": "high",
+  "category": "Demo",
+  "project_id": 1,
+  "assignee_id": 1
+}
+
+5. Add Comment to Task
+----------------------
+Endpoint: POST /api/v1/comments
+Role: Any authenticated user
+Body (JSON):
+{
+  "task_id": 1,
+  "content": "This is a comment on the demo task."
+}
+
+6. List Projects
+----------------
+Endpoint: GET /api/v1/projects
+Role: Any authenticated user
+
+7. List Tasks by Project
+------------------------
+Endpoint: GET /api/v1/tasks/project/:projectId
+Role: Any authenticated user
+
+8. Get User Profile
+-------------------
+Endpoint: GET /api/v1/users/profile
+Role: Any authenticated user
+
+Instructions:
+- Use login to get the cookie, then use the cookie for all protected endpoints.
+- Only users with the required role can access certain endpoints (see above).
+- No Authorization header is needed; all auth is via httpOnly cookie.
